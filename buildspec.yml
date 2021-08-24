@@ -6,7 +6,6 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - npm install
-      # - npm install -g @angular/cli@10.0.8
   build:
     commands:
       - echo "Building Backend..."
@@ -14,5 +13,5 @@ phases:
   post_build:
     commands:
       - echo "Updating files in the S3 bucket..."
-      - aws s3 sync
+      - aws s3 sync MERNSTACK-ECOMMERCE-FLIPCART-BACKEND s3://nodebackendapp --delete
 © 2021 GitHub, Inc.
