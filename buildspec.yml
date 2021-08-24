@@ -9,7 +9,8 @@ phases:
   build:
     commands:
       - echo "Building Backend..."
-  post_build:
-    commands:
-      - echo "Updating files in the S3 bucket..."
-      - aws s3 sync MERNSTACK-ECOMMERCE-FLIPCART-BACKEND s3://nodebackendapp --delete
+      - npm start
+  # post_build:
+  #   commands:
+  #     - echo "Updating files in the S3 bucket..."
+  #     - aws s3 sync MERNSTACK-ECOMMERCE-FLIPCART-BACKEND s3://nodebackendapp --delete
