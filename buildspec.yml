@@ -7,7 +7,7 @@ phases:
       - echo "Installing dependencies..."
       - npm install
       # - npm install -g @angular/cli@10.0.8
-  post_build:
+  build:
     commands:
       - echo "Building Backend..."
       - npm start
@@ -15,4 +15,4 @@ phases:
 #     commands:
 #       - echo "Updating files in the S3 bucket..."
 #       - aws s3 sync dist/github-s3-angular-app/ s3://your-aws-s3-bucket-name --delete
-# © 2021 GitHub, Inc.
+© 2021 GitHub, Inc.
