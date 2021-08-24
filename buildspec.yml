@@ -11,8 +11,8 @@ phases:
     commands:
       - echo "Building Backend..."
       - npm start
-#   post_build:
-#     commands:
-#       - echo "Updating files in the S3 bucket..."
-#       - aws s3 sync dist/github-s3-angular-app/ s3://your-aws-s3-bucket-name --delete
-# © 2021 GitHub, Inc.
+  post_build:
+    commands:
+      - echo "Updating files in the S3 bucket..."
+      - aws s3 sync
+© 2021 GitHub, Inc.
