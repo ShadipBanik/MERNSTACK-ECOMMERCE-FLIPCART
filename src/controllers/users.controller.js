@@ -2,7 +2,7 @@ const express=require('express');
 const usersModel= require('../models/users.js')
 
 exports.signIn =(req,res)=>{
-   res.send('hello listening ')
+   res.send('hello listening port 5000')
 }
 
 exports.signUp =(req,res)=>{
