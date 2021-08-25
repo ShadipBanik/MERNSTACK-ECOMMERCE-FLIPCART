@@ -1,16 +1,18 @@
-version: 0.2
-phases:
-  install:
-    runtime-versions:
-      nodejs: 14
-    commands:
-      - echo "Installing dependencies..."
-      - npm install
-  build:
-    commands:
-      - echo "Building Backend..."
-      - npm start
-  # post_build:
-  #   commands:
-  #     - echo "Updating files in the S3 bucket..."
-  #     - aws s3 sync MERNSTACK-ECOMMERCE-FLIPCART-BACKEND s3://nodebackendapp --delete
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/express-app
+hooks:
+  ApplicationStop:
+    - location: scripts/application_stop.sh
+      timeout: 300
+      runas: ec2-user
+  BeforeInstall:
+    - location: scripts/before_install.sh
+      timeout: 300
+      runas: ec2-user
+  ApplicationStart:
+    - location: scripts/application_start.sh
+      timeout: 300
+      runas: ec2-user
