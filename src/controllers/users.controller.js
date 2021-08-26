@@ -4,7 +4,11 @@ const usersModel= require('../models/users.js')
 exports.signIn =(req,res)=>{
    res.send('hello listening port 5000 ! succesfull')
 }
-
+exports.getAll = async (req,res) =>{
+    console.log('hello')
+    const users= await usersModel.find().then(result=>result)
+    res.status(200).json(users)
+}
 exports.signUp =(req,res)=>{
   const body = req.body
   usersModel.findOne({email:body.email})

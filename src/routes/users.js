@@ -4,5 +4,6 @@ var users= require('../controllers/users.controller.js')
 /* GET users listing. */
 router.get('/signIn',users.signIn);
 router.post('/signUp',users.signUp);
+router.get('/getAll',users.getAll);
 
 module.exports = router;
