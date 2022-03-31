@@ -1,8 +1,26 @@
 const express=require('express');
 const usersModel= require('../models/users.js')
+const jwt = require('jsonwebtoken')
+const {validationResult } = require('express-validator')
 
 exports.signIn =(req,res)=>{
-   res.send('hello listening port 5000 ! succesfull')
+   usersModel.findOne({email:req.body.email})
+    .exec((error,user) => {
+         if(error) return res.status(400).json({error})
+         if(user){
+            if(user.authenticate(req.body.password)){
+              const token= jwt.sign({ _id: user._id ,role:user.role  },process.env.JWT_SECRET, { expiresIn: '12h' });
+              res.status(200).json({
+                  token:token,
+                  user:user
+              })
+            }else{
+                res.status(400).json({message:"Invalid email or password"})
+            }
+         }else{
+           return res.status(400).json({message:"Something went wrong!"})
+         }
+    })
 }
 exports.getAll = async (req,res) =>{
     console.log('hello')
@@ -14,7 +32,7 @@ exports.signUp =(req,res)=>{
   usersModel.findOne({email:body.email})
   .exec((error,user)=>{
       if(user)
-      return res.status(400).json({
+      return res.status(400).json({ 
           message:"User Already Exist!",
           status:400
       })
@@ -24,7 +42,9 @@ exports.signUp =(req,res)=>{
         lastName,
         password,
         email,
-        username:Math.random().toString()
+        role:"user",
+        username,
+        contactNumber,
     });
      _user.save((error,data)=>{
          if(error){
@@ -34,9 +54,14 @@ exports.signUp =(req,res)=>{
          }
          if(data){
              return res.status(201).json({
+                 message:"User registration sucessgully!",
                  result:data
              })
          }
      })
   })
+}
+
+exports.profile = (req,res) =>{
+  res.send("hello")
 }

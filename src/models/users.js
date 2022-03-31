@@ -1,6 +1,5 @@
 const mongose = require('mongoose')
 const bcrypt  = require('bcrypt')
-const { route } = require('../routes')
 
 const userSchema = new mongose.Schema({
    
@@ -12,14 +11,14 @@ const userSchema = new mongose.Schema({
         max:20
     },
 
-    firstName:{
+    lastName:{
         type:String,
         required:true,
         trim:true,
         min:3,
         max:20
     },
-    username:{
+    email:{
         type:String,
         required:true,
         trim:true,
@@ -30,9 +29,6 @@ const userSchema = new mongose.Schema({
     username:{
         type:String,
         required:true,
-        trim:true,
-        uniq:true,
-        lowercase:true,
     },
     hash_password:{
         type:String,
@@ -41,12 +37,12 @@ const userSchema = new mongose.Schema({
     role:{
         type:String,
         enum:['user','admin'],
-        default:'admin',
+        default:'user',
     },
     contactNumber:{
         type:String
     },
-    ptofilePicture:{
+    profilePicture:{
         type:String,
     }
 },{timestamp:true})
